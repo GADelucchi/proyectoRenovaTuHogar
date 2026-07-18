@@ -1,0 +1,36 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# Editores / IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Dependencias
+node_modules/
+package-lock.json
+yarn.lock
+
+# Archivos de build
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Archivos de entorno / configuración local
+.env
+.env.local
+
+# Backups y temporales
+*.bak
+*.tmp
+*.swp
