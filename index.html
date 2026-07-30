@@ -1,16 +1,81 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renová tu hogar — Remodelaciones</title>
-  <link rel="icon" type="image/png" href="assets/imgs/faviconRenovaTuHoger.png">
+
+  <!-- TODO: reemplazar por el dominio real antes de publicar -->
+  <link rel="canonical" href="https://renovatuhogar.com.ar/">
+
+  <title>Remodelaciones en CABA y Buenos Aires | Renová tu hogar</title>
+  <meta name="description"
+    content="Remodelaciones en CABA (Capital Federal) y Gran Buenos Aires: cocinas, baños, fachadas y ampliaciones en seco. Presupuesto por escrito, plazos que se cumplen y 12+ años de oficio. Consultanos por WhatsApp.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Renová tu hogar">
+  <meta name="theme-color" content="#c75a16">
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:site_name" content="Renová tu hogar">
+  <meta property="og:url" content="https://renovatuhogar.com.ar/">
+  <meta property="og:title" content="Remodelaciones en CABA y Buenos Aires | Renová tu hogar">
+  <meta property="og:description"
+    content="Cocinas, baños, fachadas y ampliaciones en CABA y Gran Buenos Aires. Presupuesto claro y plazos que se cumplen.">
+  <meta property="og:image" content="https://renovatuhogar.com.ar/assets/imgs/logoRenovaTuHogar.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/imgs/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/imgs/favicon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/imgs/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/index.css">
+
+  <!-- Datos estructurados: negocio local (Google los usa para el panel de resultados) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Renová tu hogar",
+    "description": "Remodelaciones integrales, exteriores y fachadas, ampliaciones en seco y proyectos a medida en CABA y Gran Buenos Aires.",
+    "url": "https://renovatuhogar.com.ar/",
+    "image": "https://renovatuhogar.com.ar/assets/imgs/logoRenovaTuHogar.png",
+    "logo": "https://renovatuhogar.com.ar/assets/imgs/logoRenovaTuHogar.png",
+    "telephone": "+5491134295800",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ciudad Autónoma de Buenos Aires",
+      "addressRegion": "CABA",
+      "addressCountry": "AR"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Ciudad Autónoma de Buenos Aires" },
+      { "@type": "AdministrativeArea", "name": "Gran Buenos Aires" }
+    ],
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    }],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios de remodelación",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Remodelación integral de cocinas y baños" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Exteriores y fachadas" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ampliaciones en seco" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Proyectos a medida" } }
+      ]
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -18,25 +83,29 @@
   <header>
     <div class="wrap nav">
       <div class="logo">
-        <a href="#" title="Renová tu hogar">
-          <img src="assets/imgs/logoRenovaTuHogar.jpeg" alt="Renová tu hogar — Remodelaciones">
+        <a href="#" title="Renová tu hogar — inicio">
+          <picture>
+            <source srcset="assets/imgs/logo-300.webp" type="image/webp">
+            <img src="assets/imgs/logo-300.png" width="179" height="150"
+              alt="Renová tu hogar — remodelaciones en CABA">
+          </picture>
         </a>
       </div>
-      <div class="nav-links">
+      <nav class="nav-links" aria-label="Navegación principal">
         <ul>
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#antes-despues">Antes / Después</a></li>
           <li><a href="#proceso">Proceso</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
-        <a class="btn btn-primary" href="https://wa.me/5490000000000" target="_blank" rel="noopener">
+        <a class="btn btn-primary" href="https://wa.me/5491134295800" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path
               d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.52 3.68-8.2 8.24-8.2 2.2 0 4.27.86 5.82 2.42a8.15 8.15 0 0 1 2.41 5.79c0 4.52-3.68 8.21-8.23 8.21zm4.51-6.14c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.63.8-.78.96-.14.16-.29.18-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42-.14-.01-.31-.01-.47-.01a.9.9 0 0 0-.65.3c-.23.25-.86.84-.86 2.04s.88 2.37 1 2.53c.12.17 1.73 2.65 4.2 3.71.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.66-1.17.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.47-.28z" />
           </svg>
           WhatsApp
         </a>
-      </div>
+      </nav>
       <button class="menu-toggle" aria-label="Abrir menú">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
           <path d="M3 6h18M3 12h18M3 18h18" />
@@ -45,15 +114,17 @@
     </div>
   </header>
 
+  <main>
+
   <section class="hero blueprint">
     <div class="wrap hero-grid">
       <div>
-        <div class="eyebrow">Remodelaciones · La Plata y alrededores</div>
+        <div class="eyebrow">Remodelaciones · CABA y Gran Buenos Aires</div>
         <h1>Tu casa, pensada de nuevo con <em>oficio</em> y buen criterio.</h1>
-        <p class="lead">Cocinas, baños, fachadas y ampliaciones — de la idea al plano, y del plano a la obra terminada.
-          Presupuesto claro, plazos que se cumplen.</p>
+        <p class="lead">Cocinas, baños, fachadas y ampliaciones en CABA y Gran Buenos Aires — de la idea al plano, y del
+          plano a la obra terminada. Presupuesto claro, plazos que se cumplen.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="https://wa.me/5490000000000" target="_blank" rel="noopener">
+          <a class="btn btn-primary" href="https://wa.me/5491134295800" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.52 3.68-8.2 8.24-8.2 2.2 0 4.27.86 5.82 2.42a8.15 8.15 0 0 1 2.41 5.79c0 4.52-3.68 8.21-8.23 8.21z" />
@@ -72,19 +143,14 @@
       <div class="hero-art crop-marks">
         <span class="cm-tr" aria-hidden="true"></span><span class="cm-bl" aria-hidden="true"></span>
         <div class="hero-panel">
-          <svg class="room-svg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
-            <rect width="400" height="420" fill="#221e1a" />
-            <rect x="20" y="20" width="360" height="380" fill="none" stroke="rgba(236,230,214,.15)"
-              stroke-dasharray="4 5" />
-            <!-- simple house elevation -->
-            <polygon points="60,230 200,120 340,230" fill="none" stroke="#e8834a" stroke-width="2" />
-            <rect x="80" y="230" width="240" height="140" fill="#3c3129" stroke="#e8834a" stroke-width="2" />
-            <rect x="110" y="270" width="55" height="70" fill="#c75a16" opacity=".85" />
-            <rect x="235" y="260" width="70" height="50" fill="#ece6d6" opacity=".9" />
-            <line x1="235" y1="285" x2="305" y2="285" stroke="#221e1a" stroke-width="2" />
-            <line x1="270" y1="260" x2="270" y2="310" stroke="#221e1a" stroke-width="2" />
-            <circle cx="200" cy="120" r="3" fill="#e8834a" />
-          </svg>
+          <!--
+            FOTO PRINCIPAL — archivo esperado: assets/imgs/obras/hero-obra.webp
+            Formato vertical (aprox. 900 x 920 px). Es la primera imagen visible:
+            se carga con prioridad alta y NO debe llevar loading="lazy".
+          -->
+          <img class="hero-photo" src="assets/imgs/obras/hero-obra.webp" width="900" height="920"
+            alt="Cocina remodelada por Renová tu hogar en CABA, con muebles a medida y terminaciones nuevas"
+            fetchpriority="high" decoding="async">
         </div>
         <span class="dim-label" style="top:14%;left:8%;">4.20 m</span>
         <span class="dim-label" style="bottom:12%;right:8%;">obra en curso</span>
@@ -148,21 +214,18 @@
     <div class="wrap">
       <div class="sec-head">
         <div class="eyebrow">Antes / Después</div>
-        <h2>Del plano al resultado. Arrastrá para ver.</h2>
-        <p>Una muestra de obras recientes — deslizá el control sobre la imagen para comparar el estado original con la
-          entrega final.</p>
+        <h2>El antes y el después de obras reales. Arrastrá para ver.</h2>
+        <p>Una muestra de obras recientes en CABA y Gran Buenos Aires — deslizá el control sobre la imagen para comparar
+          el estado original con la entrega final.</p>
       </div>
 
-      <div class="ba-tabs" role="tablist" aria-label="Seleccionar proyecto">
-        <button class="ba-tab active" data-project="cocina">Cocina</button>
-        <button class="ba-tab" data-project="fachada">Fachada</button>
-        <button class="ba-tab" data-project="living">Living</button>
-      </div>
+      <!-- Las solapas y miniaturas se generan desde PROJECTS en assets/index.js -->
+      <div class="ba-tabs" id="baTabs" role="tablist" aria-label="Seleccionar proyecto"></div>
 
       <div class="ba-frame" id="baFrame">
         <div class="ba-layer ba-after" id="baAfter"></div>
         <div class="ba-layer ba-before" id="baBefore">
-          <span class="ba-corner-label">Antes — boceto</span>
+          <span class="ba-corner-label">Antes</span>
         </div>
         <span class="ba-corner-label lbl-after">Después</span>
         <span class="ba-hint">Arrastrá para comparar</span>
@@ -176,14 +239,7 @@
         </div>
       </div>
 
-      <div class="ba-thumbs">
-        <button class="ba-thumb active" data-project="cocina"
-          style="background:linear-gradient(135deg,#c75a16,#221e1a)"></button>
-        <button class="ba-thumb" data-project="fachada"
-          style="background:linear-gradient(135deg,#4b5b3d,#221e1a)"></button>
-        <button class="ba-thumb" data-project="living"
-          style="background:linear-gradient(135deg,#9c4610,#221e1a)"></button>
-      </div>
+      <div class="ba-thumbs" id="baThumbs"></div>
     </div>
   </section>
 
@@ -254,12 +310,12 @@
         <p class="lead">La forma más rápida de arrancar: contanos qué querés renovar y te contestamos con disponibilidad
           y una idea de presupuesto.</p>
 
-        <a class="wa-card" href="https://wa.me/5490000000000" target="_blank" rel="noopener">
+        <a class="wa-card" href="https://wa.me/5491134295800" target="_blank" rel="noopener">
           <span class="wa-icon"><svg viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.52 3.68-8.2 8.24-8.2 2.2 0 4.27.86 5.82 2.42a8.15 8.15 0 0 1 2.41 5.79c0 4.52-3.68 8.21-8.23 8.21z" />
             </svg></span>
-          <span><b>Escribinos por WhatsApp</b><span>+54 9 00 0000-0000</span></span>
+          <span><b>Escribinos por WhatsApp</b><span>+54 9 11 3429 5800</span></span>
         </a>
 
         <div class="contact-meta">
@@ -268,26 +324,26 @@
               <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0118 0z" />
               <circle cx="12" cy="10" r="3" />
             </svg>
-            <span>La Plata y alrededores — obras a domicilio</span>
+            <span>CABA y Gran Buenos Aires — obras a domicilio</span>
           </div>
           <div>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
               <circle cx="12" cy="12" r="9" />
               <path d="M12 7v5l3 3" />
             </svg>
-            <span>Lunes a sábado, 8 a 18 hs</span>
+            <span>Lunes a Sábado, 8 a 18 hs</span>
           </div>
         </div>
       </div>
 
-      <form class="form" onsubmit="return false;">
+      <form class="form" id="contactForm" novalidate>
         <div class="field">
           <label for="f-name">Nombre</label>
-          <input id="f-name" type="text" placeholder="¿Cómo te llamás?">
+          <input id="f-name" name="nombre" type="text" placeholder="¿Cómo te llamás?" required>
         </div>
         <div class="field">
           <label for="f-tipo">Tipo de obra</label>
-          <select id="f-tipo">
+          <select id="f-tipo" name="tipo">
             <option>Remodelación integral</option>
             <option>Exteriores y fachadas</option>
             <option>Ampliación en seco</option>
@@ -296,7 +352,7 @@
         </div>
         <div class="field">
           <label for="f-msg">Contanos brevemente</label>
-          <textarea id="f-msg" placeholder="Qué querés renovar y más o menos cuándo"></textarea>
+          <textarea id="f-msg" name="mensaje" placeholder="Qué querés renovar y más o menos cuándo"></textarea>
         </div>
         <button class="btn btn-primary" type="submit">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -309,24 +365,31 @@
     </div>
   </section>
 
+  </main>
+
   <footer>
     <div class="wrap foot-row">
       <div class="logo"><span class="logo-mark" aria-hidden="true"></span><span>Renová tu hogar<small>Remodelaciones
-            &amp; obra · maqueta de sitio</small></span></div>
+            &amp; obra</small></span></div>
       <div class="footer-bottom">
-        <span>© 2026 Renová tu hogar — Todos los derechos reservados</span>
-        <span>Maqueta de diseño — Diseñado por GADelucchi</span>
+        <span>© 2026 Renová tu hogar — Todos los derechos reservados — Diseñado por GADelucchi</span>
       </div>
     </div>
   </footer>
 
-  <a class="wa-float" href="https://wa.me/5490000000000" target="_blank" rel="noopener"
+  <a class="wa-float" href="https://wa.me/5491134295800" target="_blank" rel="noopener"
     aria-label="Escribinos por WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path
         d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.02h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.13.82.84-3.05-.2-.31a8.16 8.16 0 0 1-1.26-4.36c0-4.52 3.68-8.2 8.24-8.2 2.2 0 4.27.86 5.82 2.42a8.15 8.15 0 0 1 2.41 5.79c0 4.52-3.68 8.21-8.23 8.21z" />
     </svg>
   </a>
+
+  <button class="scroll-to-top" id="scrollToTop" aria-label="Volver al inicio">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+      <path d="M7 14l5-5 5 5z"/>
+    </svg>
+  </button>
 
   <script src="assets/index.js"></script>
 </body>

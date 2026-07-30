@@ -158,7 +158,7 @@ header {
   font-weight: 700;
   font-size: 1.05rem;
   letter-spacing: -0.01em;
-  height: 50px;
+  height: 100px;
 }
 
 .logo a {
@@ -168,7 +168,7 @@ header {
 }
 
 .logo img {
-  height: 48px;
+  height: 150px;
   width: auto;
   object-fit: contain;
 }
@@ -215,7 +215,7 @@ nav ul {
 
 nav ul a {
   font-size: 0.88rem;
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: none;
   color: var(--ink-soft);
   position: relative;
@@ -246,6 +246,22 @@ nav ul a:hover::after {
   display: flex;
   align-items: center;
   gap: 34px;
+}
+
+.nav-links ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links ul a {
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--ink-soft);
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.2s;
 }
 
 .btn {
@@ -284,6 +300,36 @@ nav ul a:hover::after {
   width: 16px;
   height: 16px;
   flex: none;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 26px;
+  right: 96px;
+  width: 50px;
+  height: 50px;
+  background: var(--rust);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.scroll-to-top.show {
+  display: flex;
+}
+
+.scroll-to-top:hover {
+  background: var(--rust-dark);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(34, 30, 26, 0.2);
 }
 
 .menu-toggle {
@@ -333,6 +379,7 @@ nav ul a:hover::after {
   text-transform: uppercase;
   color: var(--rust-dark);
   margin-bottom: 22px;
+  margin-top: 50px;
 }
 
 .eyebrow::before {
@@ -645,12 +692,14 @@ section {
 .ba-thumb {
   flex: 1;
   height: 64px;
+  padding: 0;
   border-radius: 3px;
   border: 2px solid transparent;
   overflow: hidden;
   opacity: 0.55;
   transition: all 0.2s;
   position: relative;
+  background: var(--paper-deep);
 }
 
 .ba-thumb.active {
@@ -662,11 +711,26 @@ section {
   opacity: 0.85;
 }
 
-/* room illustrations (svg) */
-.room-svg {
+/* fotos de obra (hero y comparador) */
+.hero-photo,
+.ba-photo {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.ba-photo {
+  pointer-events: none;
+}
+
+.ba-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
 }
 
 /* ---------- PROCESS ---------- */
@@ -870,6 +934,7 @@ section {
   border: 1px solid rgba(236, 230, 214, 0.15);
   border-radius: 6px;
   padding: 32px;
+  margin-top: 50px;
 }
 
 .form label {
