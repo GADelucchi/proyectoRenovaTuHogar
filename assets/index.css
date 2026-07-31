@@ -1487,6 +1487,6 @@ footer {
    para que no tapen el texto legal */
 @media (max-width: 1140px) {
   footer {
-    padding-bottom: calc(78px + env(safe-area-inset-bottom));
+    padding-bottom: calc(120px + env(safe-area-inset-bottom));
   }
 }
