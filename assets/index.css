@@ -11,6 +11,7 @@
   --line: rgba(34, 30, 26, 0.16);
   --line-soft: rgba(34, 30, 26, 0.09);
   --radius: 2px;
+  /* alto real del header, lo actualiza assets/index.js */
   --header-h: 96px;
 }
 
@@ -21,16 +22,17 @@
 }
 
 html {
-  background-color: var(--ink);
-  /* scroll-behavior: smooth;
+  scroll-behavior: smooth;
+  /* clip (y no hidden) evita crear un contenedor de scroll y no rompe el
+     header sticky; corta cualquier desborde horizontal residual */
   overflow-x: clip;
-  background-color: var(--ink);
-  background-image: linear-gradient(
+  /* el canvas queda claro arriba y oscuro abajo: así el rebote de iOS y la
+     barra de Safari no dejan una franja clara debajo del footer */
+  background: linear-gradient(
     to bottom,
     var(--paper) 0 50%,
     var(--ink) 50% 100%
   );
-  background-repeat: no-repeat; */
 }
 
 body {
@@ -43,18 +45,9 @@ body {
   width: 100%;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: -100vh;
-  left: 0;
-  right: 0;
-  height: 100vh;
-  background: var(--paper);
-  z-index: -1;
-  pointer-events: none;
-}
-
+/* Bloqueo del scroll con el menú abierto. Sólo en <html>: si también se
+   aplica al <body>, éste pasa a ser contenedor de scroll y el header
+   sticky se despega. */
 html.nav-open {
   overflow: hidden;
 }
@@ -519,7 +512,7 @@ nav ul {
 
 .hero-art {
   position: relative;
-  aspect-ratio: 1/1.02;
+  aspect-ratio: 4/3;
 }
 
 .hero-panel {
@@ -658,7 +651,9 @@ section {
 
 .ba-frame {
   position: relative;
-  aspect-ratio: 16/9.2;
+  aspect-ratio: 4/5;
+  max-width: 620px;
+  margin: 0 auto;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 24px 60px -20px rgba(34, 30, 26, 0.35);
@@ -762,6 +757,8 @@ section {
   display: flex;
   gap: 14px;
   margin-top: 24px;
+  max-width: 620px;
+  margin-inline: auto;
 }
 
 .ba-thumb {
@@ -1486,6 +1483,9 @@ button:focus-visible,
 }
 
 /* ---------- Footer: sin franja clara sobrante abajo ---------- */
+footer {
+  padding-bottom: calc(34px + env(safe-area-inset-bottom));
+}
 
 /* En mobile los botones flotantes quedan sobre el pie: le damos aire
    para que no tapen el texto legal */

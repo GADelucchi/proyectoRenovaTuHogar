@@ -40,7 +40,7 @@
    * Para agregar una obra nueva, sumá una entrada más: las solapas y las
    * miniaturas se generan solas a partir de este objeto.
    *
-   * Fotos recomendadas: 1600 x 920 px (16:9.2), formato .webp, < 300 KB.
+   * Fotos verticales 1200 x 1600 px (3:4), .webp, < 150 KB.
    * Sacar el antes y el después desde el MISMO ángulo para que el barrido
    * se vea bien.
    *
@@ -51,35 +51,11 @@
       label: "Cocina",
       before: {
         src: "assets/imgs/obras/cocina-antes.webp",
-        alt: "Cocina antes de la remodelación en CABA: muebles viejos y azulejos originales",
+        alt: "Cocina antes de la remodelación en CABA: muebles de melamina originales, azulejos con guarda y calefactor a la vista",
       },
       after: {
         src: "assets/imgs/obras/cocina-despues.webp",
-        alt: "Cocina remodelada en CABA con muebles a medida, mesada nueva e iluminación LED",
-      },
-    },
-
-    fachada: {
-      label: "Fachada",
-      before: {
-        src: "assets/imgs/obras/fachada-antes.webp",
-        alt: "Fachada deteriorada antes de la reforma en Ciudad Autónoma de Buenos Aires",
-      },
-      after: {
-        src: "assets/imgs/obras/fachada-despues.webp",
-        alt: "Fachada renovada en Ciudad Autónoma de Buenos Aires con revestimiento y pintura nueva",
-      },
-    },
-
-    living: {
-      label: "Living",
-      before: {
-        src: "assets/imgs/obras/living-antes.webp",
-        alt: "Living antes de la remodelación: pisos y carpintería originales",
-      },
-      after: {
-        src: "assets/imgs/obras/living-despues.webp",
-        alt: "Living remodelado en Gran Buenos Aires con pisos nuevos y aberturas ampliadas",
+        alt: "Cocina remodelada en CABA con muebles a medida sin tiradores, mesada blanca, anafe eléctrico e iluminación LED bajo alacena",
       },
     },
   };
@@ -107,8 +83,8 @@
       img.className = "ba-photo";
       img.src = src;
       img.alt = alt;
-      img.width = 1600;
-      img.height = 920;
+      img.width = 1200;
+      img.height = 1600;
       img.decoding = "async";
       img.draggable = false;
       if (!isPrimary) img.loading = "lazy";

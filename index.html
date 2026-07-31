@@ -13,7 +13,7 @@
     content="Remodelaciones en CABA (Capital Federal) y Gran Buenos Aires: cocinas, baños, fachadas y ampliaciones en seco. Presupuesto por escrito, plazos que se cumplen y 12+ años de oficio. Consultanos por WhatsApp.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Renová tu hogar">
-  <meta name="theme-color" content="#221e1a">
+  <meta name="theme-color" content="#c75a16">
 
   <!-- Open Graph / redes sociales -->
   <meta property="og:type" content="website">
@@ -115,6 +115,8 @@
     </div>
   </header>
 
+  <!-- Velo del menú mobile: fuera del <header> porque su backdrop-filter
+       crearía un bloque contenedor para elementos position:fixed -->
   <div class="nav-backdrop" id="navBackdrop" hidden></div>
 
   <main>
@@ -146,13 +148,8 @@
       <div class="hero-art crop-marks">
         <span class="cm-tr" aria-hidden="true"></span><span class="cm-bl" aria-hidden="true"></span>
         <div class="hero-panel">
-          <!--
-            FOTO PRINCIPAL — archivo esperado: assets/imgs/obras/hero-obra.webp
-            Formato vertical (aprox. 900 x 920 px). Es la primera imagen visible:
-            se carga con prioridad alta y NO debe llevar loading="lazy".
-          -->
-          <img class="hero-photo" src="assets/imgs/obras/hero-obra.webp" width="900" height="920"
-            alt="Cocina remodelada por Renová tu hogar en CABA, con muebles a medida y terminaciones nuevas"
+          <img class="hero-photo" src="assets/imgs/obras/hero-obra.webp" width="1200" height="900"
+            alt="Cocina remodelada por Renová tu hogar en CABA, con muebles a medida en tono grafito, mesada de granito e iluminación LED"
             fetchpriority="high" decoding="async">
         </div>
         <span class="dim-label" style="top:14%;left:8%;">4.20 m</span>
