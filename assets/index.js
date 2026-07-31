@@ -14,6 +14,10 @@
     whatsappNumber: "5491134295800",
     scrollTopOffset: 300,
     comparator: { min: 4, max: 96, initial: 50 },
+    /* Hasta este ancho se usa el menú hamburguesa: cubre iPhones en ambas
+       orientaciones e iPads de 8,3" a 11" verticales, más la iPad mini
+       apaisada (1133 px). Por encima queda la navegación de escritorio. */
+    mobileNavBreakpoint: 1140,
   };
 
   /* ---------------------------------------------------------------- */
@@ -211,6 +215,85 @@
   };
 
   /* ---------------------------------------------------------------- */
+  /* Menú hamburguesa (mobile / tablet)                               */
+  /* ---------------------------------------------------------------- */
+
+  const initMobileNav = () => {
+    const header = $("header");
+    const toggle = $("#menuToggle");
+    const panel = $("#primaryNav");
+    const backdrop = $("#navBackdrop");
+
+    if (!header || !toggle || !panel) return;
+
+    /* El panel se despliega justo debajo del header, cuya altura cambia
+       según la orientación: la exponemos como variable CSS. */
+    const syncHeaderHeight = () => {
+      document.documentElement.style.setProperty(
+        "--header-h",
+        `${Math.round(header.getBoundingClientRect().height)}px`
+      );
+    };
+
+    const isOpen = () => header.classList.contains("nav-open");
+
+    const setOpen = (open) => {
+      header.classList.toggle("nav-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      document.documentElement.classList.toggle("nav-open", open);
+
+      if (!backdrop) return;
+      if (open) {
+        backdrop.hidden = false;
+        requestAnimationFrame(() => backdrop.classList.add("show"));
+      } else {
+        backdrop.classList.remove("show");
+        backdrop.hidden = true;
+      }
+    };
+
+    const close = () => {
+      if (isOpen()) setOpen(false);
+    };
+
+    syncHeaderHeight();
+
+    toggle.addEventListener("click", () => {
+      syncHeaderHeight();
+      setOpen(!isOpen());
+    });
+
+    backdrop?.addEventListener("click", close);
+
+    panel.addEventListener("click", (event) => {
+      if (event.target.closest("a")) close();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") close();
+    });
+
+    const desktop = window.matchMedia(
+      `(min-width: ${CONFIG.mobileNavBreakpoint + 1}px)`
+    );
+    desktop.addEventListener("change", (event) => {
+      if (event.matches) close();
+      syncHeaderHeight();
+    });
+
+    window.addEventListener("resize", syncHeaderHeight, { passive: true });
+    window.addEventListener("orientationchange", () => {
+      close();
+      setTimeout(syncHeaderHeight, 200);
+    });
+
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(syncHeaderHeight).observe(header);
+    }
+  };
+
+  /* ---------------------------------------------------------------- */
   /* Botón "volver arriba"                                            */
   /* ---------------------------------------------------------------- */
 
@@ -274,6 +357,7 @@
   /* ---------------------------------------------------------------- */
 
   const init = () => {
+    initMobileNav();
     initBeforeAfter();
     initScrollToTop();
     initContactForm();

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <!-- TODO: reemplazar por el dominio real antes de publicar -->
   <link rel="canonical" href="https://renovatuhogar.ar/">
@@ -91,7 +91,7 @@
           </picture>
         </a>
       </div>
-      <nav class="nav-links" aria-label="Navegación principal">
+      <nav class="nav-links" id="primaryNav" aria-label="Navegación principal">
         <ul>
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#antes-despues">Antes / Después</a></li>
@@ -106,13 +106,18 @@
           WhatsApp
         </a>
       </nav>
-      <button class="menu-toggle" aria-label="Abrir menú">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M3 6h18M3 12h18M3 18h18" />
-        </svg>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú" aria-expanded="false"
+        aria-controls="primaryNav">
+        <span class="menu-toggle-bars" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
       </button>
     </div>
   </header>
+
+  <!-- Velo del menú mobile: fuera del <header> porque su backdrop-filter
+       crearía un bloque contenedor para elementos position:fixed -->
+  <div class="nav-backdrop" id="navBackdrop" hidden></div>
 
   <main>
 

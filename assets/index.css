@@ -11,6 +11,8 @@
   --line: rgba(34, 30, 26, 0.16);
   --line-soft: rgba(34, 30, 26, 0.09);
   --radius: 2px;
+  /* alto real del header, lo actualiza assets/index.js */
+  --header-h: 96px;
 }
 
 * {
@@ -21,6 +23,16 @@
 
 html {
   scroll-behavior: smooth;
+  /* clip (y no hidden) evita crear un contenedor de scroll y no rompe el
+     header sticky; corta cualquier desborde horizontal residual */
+  overflow-x: clip;
+  /* el canvas queda claro arriba y oscuro abajo: así el rebote de iOS y la
+     barra de Safari no dejan una franja clara debajo del footer */
+  background: linear-gradient(
+    to bottom,
+    var(--paper) 0 50%,
+    var(--ink) 50% 100%
+  );
 }
 
 body {
@@ -29,6 +41,15 @@ body {
   font-family: "Work Sans", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  width: 100%;
+}
+
+/* Bloqueo del scroll con el menú abierto. Sólo en <html>: si también se
+   aplica al <body>, éste pasa a ser contenedor de scroll y el header
+   sticky se despega. */
+html.nav-open {
+  overflow: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -48,6 +69,14 @@ h3 {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 600;
   letter-spacing: -0.01em;
+  overflow-wrap: break-word;
+}
+
+p,
+li,
+span,
+a {
+  overflow-wrap: break-word;
 }
 
 .mono {
@@ -147,7 +176,8 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
+  /* padding-block, para no pisar el padding horizontal de .wrap */
+  padding-block: 18px;
 }
 
 .logo {
@@ -208,38 +238,7 @@ header {
 }
 
 nav ul {
-  display: flex;
-  gap: 30px;
   list-style: none;
-}
-
-nav ul a {
-  font-size: 0.88rem;
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--ink-soft);
-  position: relative;
-  padding: 4px 0;
-  transition: color 0.2s;
-}
-
-nav ul a:hover {
-  color: var(--ink);
-}
-
-nav ul a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 2px;
-  background: var(--rust);
-  transition: width 0.25s;
-}
-
-nav ul a:hover::after {
-  width: 100%;
 }
 
 .nav-links {
@@ -262,6 +261,25 @@ nav ul a:hover::after {
   position: relative;
   padding: 4px 0;
   transition: color 0.2s;
+}
+
+.nav-links ul a:hover {
+  color: var(--ink);
+}
+
+.nav-links ul a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: var(--rust);
+  transition: width 0.25s;
+}
+
+.nav-links ul a:hover::after {
+  width: 100%;
 }
 
 .btn {
@@ -332,20 +350,70 @@ nav ul a:hover::after {
   box-shadow: 0 4px 12px rgba(34, 30, 26, 0.2);
 }
 
+/* ---------- BOTÓN HAMBURGUESA ---------- */
 .menu-toggle {
   display: none;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-right: -8px;
   background: none;
   border: none;
+  color: var(--ink);
+  border-radius: var(--radius);
+  flex: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-@media (max-width: 860px) {
-  nav ul {
-    display: none;
-  }
+.menu-toggle-bars {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 16px;
+}
 
-  .menu-toggle {
-    display: block;
-  }
+.menu-toggle-bars span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition:
+    transform 0.25s ease,
+    opacity 0.15s ease,
+    top 0.25s ease;
+}
+
+.menu-toggle-bars span:nth-child(1) {
+  top: 0;
+}
+
+.menu-toggle-bars span:nth-child(2) {
+  top: 7px;
+}
+
+.menu-toggle-bars span:nth-child(3) {
+  top: 14px;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-bars span:nth-child(1) {
+  top: 7px;
+  transform: rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-bars span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-bars span:nth-child(3) {
+  top: 7px;
+  transform: rotate(-45deg);
+}
+
+.nav-backdrop {
+  display: none;
 }
 
 /* ---------- HERO ---------- */
@@ -1088,4 +1156,337 @@ button:focus-visible,
 .ba-tab:focus-visible {
   outline: 2px solid var(--rust);
   outline-offset: 2px;
+}
+
+/* ================================================================== */
+/* RESPONSIVE                                                          */
+/* Breakpoints de referencia:                                          */
+/*   <= 1140px  iPhones (vertical/horizontal) + iPads 8,3" a 11"       */
+/*              verticales y iPad mini apaisada (1133px) -> hamburguesa*/
+/*   > 1140px   iPad 11"/13" apaisada y desktop -> navegación completa */
+/* ================================================================== */
+
+/* ---------- Botones flotantes: apilados y con safe-area ---------- */
+.wa-float {
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+}
+
+.scroll-to-top {
+  right: max(20px, env(safe-area-inset-right));
+  bottom: calc(max(20px, env(safe-area-inset-bottom)) + 68px);
+}
+
+@media (min-width: 1141px) {
+  .scroll-to-top {
+    right: 96px;
+    bottom: 26px;
+  }
+}
+
+/* ---------- Menú hamburguesa ---------- */
+@media (max-width: 1140px) {
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .nav {
+    padding-block: 10px;
+    gap: 12px;
+  }
+
+  .logo {
+    height: auto;
+    min-width: 0;
+  }
+
+  .logo img {
+    height: 72px;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 45;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 6px 20px calc(20px + env(safe-area-inset-bottom));
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 22px 44px -26px rgba(34, 30, 26, 0.65);
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      visibility 0.22s;
+  }
+
+  header.nav-open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+
+  .nav-links ul li + li {
+    border-top: 1px solid var(--line-soft);
+  }
+
+  .nav-links ul a {
+    display: block;
+    padding: 15px 2px;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  .nav-links ul a::after {
+    display: none;
+  }
+
+  .nav-links .btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 18px;
+    padding: 14px 20px;
+  }
+
+  .nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    z-index: 39;
+    background: rgba(34, 30, 26, 0.45);
+    opacity: 0;
+    transition: opacity 0.22s ease;
+  }
+
+  .nav-backdrop[hidden] {
+    display: none;
+  }
+
+  .nav-backdrop.show {
+    opacity: 1;
+  }
+}
+
+/* ---------- Tablets verticales y menores ---------- */
+@media (max-width: 1024px) {
+  section {
+    padding: 72px 0;
+  }
+
+  .hero {
+    padding: 56px 0 72px;
+  }
+
+  .eyebrow {
+    margin-top: 0;
+  }
+
+  .form {
+    margin-top: 0;
+  }
+
+  .sec-head {
+    margin-bottom: 44px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-art {
+    width: 100%;
+    max-width: 560px;
+    margin-inline: auto;
+  }
+}
+
+/* ---------- Teléfonos (vertical) ---------- */
+@media (max-width: 700px) {
+  .wrap {
+    padding: 0 20px;
+  }
+
+  section {
+    padding: 56px 0;
+  }
+
+  .hero {
+    padding: 36px 0 56px;
+  }
+
+  .logo img {
+    height: 56px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.85rem, 8.4vw, 2.5rem);
+  }
+
+  .hero p.lead {
+    font-size: 1rem;
+    margin-bottom: 26px;
+  }
+
+  .hero-cta {
+    gap: 12px;
+    margin-bottom: 38px;
+  }
+
+  .hero-cta .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+    padding: 13px 18px;
+  }
+
+  .stat-row {
+    flex-wrap: wrap;
+    gap: 18px 0;
+  }
+
+  .stat {
+    flex: 1 1 33%;
+    min-width: 0;
+    padding-right: 12px;
+  }
+
+  .stat b {
+    font-size: 1.35rem;
+  }
+
+  .sec-head {
+    margin-bottom: 32px;
+  }
+
+  .svc-card {
+    padding: 26px 22px;
+  }
+
+  .ba-frame {
+    aspect-ratio: 4 / 3;
+  }
+
+  .ba-tabs {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .ba-thumbs {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .ba-thumb {
+    height: 54px;
+  }
+
+  .testi-card {
+    padding: 26px 22px;
+  }
+
+  .proc-item {
+    padding: 24px 0;
+  }
+
+  .wa-card {
+    padding: 18px 16px;
+    gap: 14px;
+  }
+
+  .wa-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .form {
+    padding: 24px 18px;
+  }
+
+  /* 16px evita el zoom automático de iOS al enfocar un campo,
+     que es otra fuente de desplazamiento horizontal */
+  .form input,
+  .form select,
+  .form textarea {
+    font-size: 16px;
+  }
+
+  .foot-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+
+  .foot-row .logo {
+    height: auto;
+  }
+
+  .footer-bottom {
+    width: 100%;
+  }
+}
+
+/* ---------- Teléfonos (horizontal) ---------- */
+@media (orientation: landscape) and (max-height: 500px) {
+  .nav {
+    padding-block: 6px;
+  }
+
+  .logo img {
+    height: 44px;
+  }
+
+  section {
+    padding: 44px 0;
+  }
+
+  .hero {
+    padding: 28px 0 44px;
+  }
+
+  .hero-grid {
+    gap: 32px;
+  }
+
+  .hero-art {
+    max-width: 420px;
+  }
+
+  .nav-links ul a {
+    padding: 11px 2px;
+  }
+
+  .nav-links .btn {
+    margin-top: 12px;
+  }
+
+  .ba-frame {
+    aspect-ratio: 16 / 9.2;
+  }
+}
+
+/* ---------- Footer: sin franja clara sobrante abajo ---------- */
+footer {
+  padding-bottom: calc(34px + env(safe-area-inset-bottom));
+}
+
+/* En mobile los botones flotantes quedan sobre el pie: le damos aire
+   para que no tapen el texto legal */
+@media (max-width: 1140px) {
+  footer {
+    padding-bottom: calc(78px + env(safe-area-inset-bottom));
+  }
 }
