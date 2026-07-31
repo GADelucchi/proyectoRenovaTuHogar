@@ -23,16 +23,14 @@
 
 html {
   scroll-behavior: smooth;
-  /* clip (y no hidden) evita crear un contenedor de scroll y no rompe el
-     header sticky; corta cualquier desborde horizontal residual */
   overflow-x: clip;
-  /* el canvas queda claro arriba y oscuro abajo: así el rebote de iOS y la
-     barra de Safari no dejan una franja clara debajo del footer */
-  background: linear-gradient(
+  background-color: var(--ink);
+  background-image: linear-gradient(
     to bottom,
     var(--paper) 0 50%,
     var(--ink) 50% 100%
   );
+  background-repeat: no-repeat;
 }
 
 body {
@@ -1487,6 +1485,6 @@ footer {
    para que no tapen el texto legal */
 @media (max-width: 1140px) {
   footer {
-    padding-bottom: calc(120px + env(safe-area-inset-bottom));
+    padding-bottom: calc(78px + env(safe-area-inset-bottom));
   }
 }
