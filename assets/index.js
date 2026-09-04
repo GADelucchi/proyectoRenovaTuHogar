@@ -58,7 +58,49 @@
         alt: "Cocina remodelada en CABA con muebles a medida sin tiradores, mesada blanca, anafe eléctrico e iluminación LED bajo alacena",
       },
     },
+    bano: {
+      label: "Baño",
+      before: {
+        src: "assets/imgs/obras/bano-antes.webp",
+        alt: "Baño antes de la reforma: paredes descascaradas sin revestimiento, piso de mosaico granítico e inodoro con mochila a la vista",
+      },
+      after: {
+        src: "assets/imgs/obras/bano-despues.webp",
+        alt: "Baño reformado con porcelanato símil cemento, ducha a nivel con canaleta lineal, grifería empotrada acero y vanitory azul a medida",
+      },
+    },
   };
+
+  /* ---------------------------------------------------------------- */
+  /* Datos: galería de obras terminadas                               */
+  /* ---------------------------------------------------------------- */
+
+  /**
+   * Único lugar a editar para sumar fotos a la galería.
+   *
+   * Fotos verticales 1200 x 1600 px (3:4), .webp, < 150 KB — la grilla
+   * recorta a 3:4, así que lo importante tiene que estar centrado.
+   *
+   * `caption` es el rótulo que se ve sobre la foto; `alt` es el que lee
+   * Google: describir qué se hizo y dónde.
+   */
+  const GALLERY = [
+    {
+      src: "assets/imgs/obras/bano-espejo.webp",
+      caption: "Baño · espejo LED",
+      alt: "Baño reformado en CABA con espejo ovalado retroiluminado LED, spots embutidos, grifería alta y bacha apoyada sobre vanitory azul",
+    },
+    {
+      src: "assets/imgs/obras/cocina-despues.webp",
+      caption: "Cocina · muebles a medida",
+      alt: "Cocina remodelada en CABA con muebles a medida sin tiradores, mesada blanca, anafe eléctrico e iluminación LED bajo alacena",
+    },
+    {
+      src: "assets/imgs/obras/hero-obra.webp",
+      caption: "Cocina · tono grafito",
+      alt: "Cocina remodelada por Renová tu hogar en CABA, con muebles a medida en tono grafito, mesada de granito e iluminación LED",
+    },
+  ];
 
   /* ---------------------------------------------------------------- */
   /* Comparador antes / después                                       */
@@ -329,12 +371,123 @@
   };
 
   /* ---------------------------------------------------------------- */
+  /* Galería de obras + lightbox                                      */
+  /* ---------------------------------------------------------------- */
+
+  const initGallery = () => {
+    const grid = $("#galGrid");
+    if (!grid || !GALLERY.length) return;
+
+    let lightbox = null;
+    let currentIndex = 0;
+    let lastFocused = null;
+
+    GALLERY.forEach((photo, index) => {
+      const item = document.createElement("button");
+      item.type = "button";
+      item.className = "gal-item";
+      item.dataset.index = index;
+      item.setAttribute("aria-label", `Ampliar foto: ${photo.caption}`);
+
+      const img = new Image();
+      img.src = photo.src;
+      img.alt = photo.alt;
+      img.width = 1200;
+      img.height = 1600;
+      img.loading = "lazy";
+      img.decoding = "async";
+
+      const caption = document.createElement("span");
+      caption.className = "gal-cap";
+      caption.textContent = photo.caption;
+
+      item.append(img, caption);
+      grid.append(item);
+    });
+
+    const iconButton = (className, label, path) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `lb-btn ${className}`;
+      button.setAttribute("aria-label", label);
+      button.innerHTML =
+        `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg>`;
+      return button;
+    };
+
+    const show = (index) => {
+      currentIndex = (index + GALLERY.length) % GALLERY.length;
+      const photo = GALLERY[currentIndex];
+      $(".lb-photo", lightbox).src = photo.src;
+      $(".lb-photo", lightbox).alt = photo.alt;
+      $(".lb-caption", lightbox).textContent = photo.caption;
+    };
+
+    const close = () => {
+      if (!lightbox) return;
+      lightbox.remove();
+      lightbox = null;
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    };
+
+    const open = (index) => {
+      lastFocused = document.activeElement;
+
+      lightbox = document.createElement("div");
+      lightbox.className = "lightbox";
+      lightbox.setAttribute("role", "dialog");
+      lightbox.setAttribute("aria-modal", "true");
+      lightbox.setAttribute("aria-label", "Foto de obra ampliada");
+
+      const photo = new Image();
+      photo.className = "lb-photo";
+
+      const caption = document.createElement("p");
+      caption.className = "lb-caption";
+
+      const closeBtn = iconButton("lb-close", "Cerrar", "M6 6l12 12M18 6L6 18");
+      const prevBtn = iconButton("lb-prev", "Foto anterior", "M15 5l-7 7 7 7");
+      const nextBtn = iconButton("lb-next", "Foto siguiente", "M9 5l7 7-7 7");
+
+      closeBtn.addEventListener("click", close);
+      prevBtn.addEventListener("click", () => show(currentIndex - 1));
+      nextBtn.addEventListener("click", () => show(currentIndex + 1));
+
+      lightbox.append(photo, caption, closeBtn);
+      if (GALLERY.length > 1) lightbox.append(prevBtn, nextBtn);
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) close();
+      });
+
+      document.body.append(lightbox);
+      document.body.style.overflow = "hidden";
+      show(index);
+      closeBtn.focus();
+    };
+
+    grid.addEventListener("click", (event) => {
+      const item = event.target.closest(".gal-item");
+      if (item) open(Number(item.dataset.index));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox) return;
+      if (event.key === "Escape") close();
+      if (event.key === "ArrowLeft") show(currentIndex - 1);
+      if (event.key === "ArrowRight") show(currentIndex + 1);
+    });
+  };
+
+  /* ---------------------------------------------------------------- */
   /* Arranque                                                         */
   /* ---------------------------------------------------------------- */
 
   const init = () => {
     initMobileNav();
     initBeforeAfter();
+    initGallery();
     initScrollToTop();
     initContactForm();
   };
