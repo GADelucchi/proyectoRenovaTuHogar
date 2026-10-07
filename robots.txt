@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://renovatuhogar.ar/sitemap.xml
+Sitemap: https://www.renovatuhogar.ar/sitemap.xml
