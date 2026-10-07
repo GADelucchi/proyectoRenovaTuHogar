@@ -69,6 +69,17 @@
         alt: "Baño reformado con porcelanato símil cemento, ducha a nivel con canaleta lineal, grifería empotrada acero y vanitory azul a medida",
       },
     },
+    cocina2: {
+      label: "Cocina 2",
+      before: {
+        src: "assets/imgs/obras/cocina2-antes.webp",
+        alt: "Cocina antes de la remodelación: muebles blancos con tiradores, mesada de acero con pileta doble, cocina a gas de pie y azulejos blancos",
+      },
+      after: {
+        src: "assets/imgs/obras/cocina2-despues.webp",
+        alt: "Cocina remodelada con bajo mesada símil madera, alacenas gris claro sin tiradores hasta el techo, mesada blanca, anafe y horno empotrados y piso continuo gris",
+      },
+    },
   };
 
   /* ---------------------------------------------------------------- */
