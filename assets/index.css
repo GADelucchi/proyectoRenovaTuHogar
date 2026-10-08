@@ -955,7 +955,7 @@ section {
 /* ---------- TESTIMONIALS ---------- */
 .testi-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
@@ -964,6 +964,12 @@ section {
 .testi-card {
   background: var(--paper);
   padding: 36px;
+}
+
+.testi-stars {
+  color: var(--rust);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
 }
 
 .testi-card p {
@@ -981,6 +987,19 @@ section {
   color: var(--ink-soft);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.testi-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.testi-cta p {
+  color: var(--ink-soft);
 }
 
 /* ---------- CONTACT ---------- */
