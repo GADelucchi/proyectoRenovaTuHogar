@@ -11,12 +11,14 @@
   /* ---------------------------------------------------------------- */
 
   const CONFIG = {
+    /* el número también está en index.html: ver la lista de los 7 lugares
+       en el comentario "TELÉFONO / WHATSAPP" del <head> */
     whatsappNumber: "5491134295800",
     scrollTopOffset: 300,
     comparator: { min: 4, max: 96, initial: 50 },
     /* Hasta este ancho se usa el menú hamburguesa: cubre iPhones en ambas
-       orientaciones e iPads de 8,3" a 11" verticales, más la iPad mini
-       apaisada (1133 px). Por encima queda la navegación de escritorio. */
+      orientaciones e iPads de 8,3" a 11" verticales, más la iPad mini
+      apaisada (1133 px). Por encima queda la navegación de escritorio. */
     mobileNavBreakpoint: 1140,
   };
 
@@ -30,6 +32,16 @@
 
   const buildWhatsAppUrl = (message) =>
     `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+  /**
+   * Registra en Google Analytics una consulta por WhatsApp (la conversión
+   * del sitio). `ubicacion` dice desde qué botón vino. Si gtag no cargó
+   * (bloqueador de anuncios, sin conexión) no hace nada.
+   */
+  const trackWhatsApp = (ubicacion) => {
+    if (typeof window.gtag !== "function") return;
+    window.gtag("event", "click_whatsapp", { ubicacion });
+  };
 
   /* ---------------------------------------------------------------- */
   /* Datos: obras del comparador antes / después                      */
@@ -376,6 +388,7 @@
         mensaje: readField("mensaje"),
       });
 
+      trackWhatsApp("formulario");
       window.open(buildWhatsAppUrl(message), "_blank", "noopener");
       form.reset();
     });
@@ -492,6 +505,27 @@
   };
 
   /* ---------------------------------------------------------------- */
+  /* Analíticas: clics a WhatsApp                                     */
+  /* ---------------------------------------------------------------- */
+
+  const WHATSAPP_LOCATIONS = [
+    [".wa-float", "flotante"],
+    ["header", "menu"],
+    [".hero", "hero"],
+    ["#contacto", "contacto"],
+  ];
+
+  const initWhatsAppTracking = () => {
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest('a[href^="https://wa.me/"]');
+      if (!link) return;
+
+      const match = WHATSAPP_LOCATIONS.find(([selector]) => link.closest(selector));
+      trackWhatsApp(match ? match[1] : "otro");
+    });
+  };
+
+  /* ---------------------------------------------------------------- */
   /* Arranque                                                         */
   /* ---------------------------------------------------------------- */
 
@@ -501,6 +535,7 @@
     initGallery();
     initScrollToTop();
     initContactForm();
+    initWhatsAppTracking();
   };
 
   if (document.readyState === "loading") {

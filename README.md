@@ -1,4 +1,4 @@
-# ![Renová tu hogar](assets/imgs/logoRenovaTuHogar.jpeg)
+# ![Renová tu hogar](assets/imgs/logoRenovaTuHogar.png)
 
 ## Remodelaciones & obra — CABA y alrededores
 
@@ -42,7 +42,7 @@ Explorar nuestros proyectos antes / después en [la web](index.html) para ver tr
 
 **Consultá sin compromiso:**
 
-- 📱 [WhatsApp](https://wa.me/5490000000000) — Respuesta inmediata
+- 📱 [WhatsApp](https://wa.me/5491134295800) — Respuesta inmediata
 - 🏠 Servicio a domicilio para relevamiento
 
 ---

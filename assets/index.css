@@ -1,3 +1,16 @@
+/*
+ * Renová tu hogar — estilos del sitio.
+ *
+ * Orden del archivo:
+ *   1. Tokens, base y decoraciones
+ *   2. Componentes, en el mismo orden en que aparecen en la página
+ *      (estilos de escritorio)
+ *   3. RESPONSIVE: todas las adaptaciones por tamaño de pantalla, juntas y
+ *      ordenadas de la pantalla más ancha a la más angosta
+ *   4. REDUCED MOTION: ajustes para quien pide menos animaciones
+ */
+
+/* ---------- TOKENS ---------- */
 :root {
   --ink: #221e1a;
   --ink-soft: #4a453d;
@@ -15,6 +28,7 @@
   --header-h: 96px;
 }
 
+/* ---------- BASE ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -52,17 +66,6 @@ html.nav-open {
   overflow: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  * {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
-  }
-}
-
 h1,
 h2,
 h3 {
@@ -97,19 +100,21 @@ button {
   cursor: pointer;
 }
 
+/* contenedor de los íconos reutilizables (<symbol>) al inicio del <body>:
+   no se dibuja, sólo lo referencian los <use href="#icon-..."> */
+.svg-sprite {
+  display: none;
+}
+
+/* ---------- LAYOUT ---------- */
 .wrap {
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 32px;
 }
 
-@media (max-width: 640px) {
-  .wrap {
-    padding: 0 20px;
-  }
-}
-
-/* blueprint grid background */
+/* ---------- DECORATIONS ---------- */
+/* grilla de plano de fondo */
 .blueprint {
   background-image:
     linear-gradient(var(--line-soft) 1px, transparent 1px),
@@ -117,6 +122,7 @@ button {
   background-size: 40px 40px;
 }
 
+/* marcas de corte en las esquinas (como en un plano impreso) */
 .crop-marks {
   position: relative;
 }
@@ -282,6 +288,7 @@ nav ul {
   width: 100%;
 }
 
+/* ---------- BUTTONS ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -320,37 +327,8 @@ nav ul {
   flex: none;
 }
 
-.scroll-to-top {
-  position: fixed;
-  bottom: 26px;
-  right: 96px;
-  width: 50px;
-  height: 50px;
-  background: var(--rust);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  font-size: 1.2rem;
-}
-
-.scroll-to-top.show {
-  display: flex;
-}
-
-.scroll-to-top:hover {
-  background: var(--rust-dark);
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(34, 30, 26, 0.2);
-}
-
-/* ---------- BOTÓN HAMBURGUESA ---------- */
+/* ---------- MENU TOGGLE ---------- */
+/* oculto en escritorio; se muestra en RESPONSIVE (<= 1140px) */
 .menu-toggle {
   display: none;
   align-items: center;
@@ -412,6 +390,7 @@ nav ul {
   transform: rotate(-45deg);
 }
 
+/* velo detrás del menú mobile; se activa en RESPONSIVE (<= 1140px) */
 .nav-backdrop {
   display: none;
 }
@@ -430,13 +409,6 @@ nav ul {
   align-items: center;
 }
 
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-}
-
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -448,6 +420,14 @@ nav ul {
   color: var(--rust-dark);
   margin-bottom: 22px;
   margin-top: 50px;
+}
+
+/* antetítulo del hero: vive dentro del <h1> pero no hereda su tipografía */
+.hero h1 .eyebrow {
+  display: flex;
+  width: fit-content;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .eyebrow::before {
@@ -523,6 +503,7 @@ nav ul {
   overflow: hidden;
 }
 
+/* rótulos tipo cota sobre la foto del hero */
 .dim-label {
   position: absolute;
   font-family: "JetBrains Mono";
@@ -532,6 +513,16 @@ nav ul {
   padding: 2px 8px;
   border-radius: 2px;
   letter-spacing: 0.03em;
+}
+
+.dim-label-top {
+  top: 14%;
+  left: 8%;
+}
+
+.dim-label-bottom {
+  bottom: 12%;
+  right: 8%;
 }
 
 /* ---------- SECTION HEADS ---------- */
@@ -569,18 +560,6 @@ section {
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
-}
-
-@media (max-width: 900px) {
-  .svc-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 560px) {
-  .svc-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .svc-card {
@@ -805,7 +784,7 @@ section {
   pointer-events: none;
 }
 
-/* ---------- GALERÍA DE OBRAS ---------- */
+/* ---------- GALLERY ---------- */
 .gal-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -856,7 +835,7 @@ section {
   pointer-events: none;
 }
 
-/* ---------- Lightbox ---------- */
+/* ---------- LIGHTBOX ---------- */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -938,41 +917,6 @@ section {
   transform: translateY(-50%);
 }
 
-@media (max-width: 760px) {
-  .gal-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .lightbox {
-    padding: 12px;
-  }
-
-  .lb-prev {
-    left: 8px;
-  }
-
-  .lb-next {
-    right: 8px;
-  }
-
-  .lb-caption {
-    padding: 0 56px;
-    font-size: 0.68rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gal-item img {
-    transition: none;
-  }
-
-  .gal-item:hover img,
-  .gal-item:focus-visible img {
-    transform: none;
-  }
-}
-
 /* ---------- PROCESS ---------- */
 .process {
   background: var(--paper-alt);
@@ -1008,13 +952,6 @@ section {
   max-width: 520px;
 }
 
-@media (max-width: 560px) {
-  .proc-item {
-    grid-template-columns: 50px 1fr;
-    gap: 16px;
-  }
-}
-
 /* ---------- TESTIMONIALS ---------- */
 .testi-grid {
   display: grid;
@@ -1022,12 +959,6 @@ section {
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
-}
-
-@media (max-width: 760px) {
-  .testi-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .testi-card {
@@ -1077,11 +1008,9 @@ section {
   gap: 60px;
 }
 
-@media (max-width: 900px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-    gap: 44px;
-  }
+/* sobre fondo oscuro el antetítulo usa el óxido claro */
+.contact .eyebrow {
+  color: var(--rust-light);
 }
 
 .contact h2 {
@@ -1231,7 +1160,8 @@ section {
 footer {
   background: var(--ink);
   border-top: 1px solid rgba(236, 230, 214, 0.12);
-  padding: 34px 0;
+  /* abajo suma la safe-area para que no quede franja clara sobrante */
+  padding: 34px 0 calc(34px + env(safe-area-inset-bottom));
 }
 
 .footer-bottom {
@@ -1264,11 +1194,12 @@ footer {
   color: rgba(236, 230, 214, 0.45);
 }
 
-/* WhatsApp float */
+/* ---------- FLOATING BUTTONS ---------- */
+/* WhatsApp flotante: respeta la safe-area (notch / barra de inicio) */
 .wa-float {
   position: fixed;
-  bottom: 26px;
-  right: 26px;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  right: max(20px, env(safe-area-inset-right));
   z-index: 50;
   width: 58px;
   height: 58px;
@@ -1309,12 +1240,39 @@ footer {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .wa-float::before {
-    animation: none;
-  }
+/* "volver arriba": en escritorio va a la izquierda del de WhatsApp;
+   en RESPONSIVE (<= 1140px) se apila encima */
+.scroll-to-top {
+  position: fixed;
+  bottom: 26px;
+  right: 96px;
+  width: 50px;
+  height: 50px;
+  background: var(--rust);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
+.scroll-to-top.show {
+  display: flex;
+}
+
+.scroll-to-top:hover {
+  background: var(--rust-dark);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(34, 30, 26, 0.2);
+}
+
+/* ---------- ACCESSIBILITY ---------- */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -1332,32 +1290,29 @@ button:focus-visible,
 
 /* ================================================================== */
 /* RESPONSIVE                                                          */
-/* Breakpoints de referencia:                                          */
+/*                                                                     */
+/* Todo lo que cambia según el tamaño de pantalla está acá, de la      */
+/* pantalla más ancha a la más angosta (cada bloque pisa al anterior). */
+/* Dentro de cada bloque, los componentes siguen el orden de la página.*/
+/*                                                                     */
 /*   <= 1140px  iPhones (vertical/horizontal) + iPads 8,3" a 11"       */
 /*              verticales y iPad mini apaisada (1133px) -> hamburguesa*/
-/*   > 1140px   iPad 11"/13" apaisada y desktop -> navegación completa */
+/*              (> 1140px: iPad 11"/13" apaisada y desktop -> nav      */
+/*              completa)                                              */
+/*   <= 1024px  tablets verticales: menos aire vertical                */
+/*   <=  900px  grillas de dos columnas pasan a una                    */
+/*   <=  760px  galería a dos columnas, testimonios a una              */
+/*   <=  700px  teléfonos en vertical                                  */
+/*   <=  560px  teléfonos angostos                                     */
+/*   landscape + alto <= 500px  teléfonos en horizontal                */
+/*                                                                     */
+/* El valor 1140 está repetido en CONFIG.mobileNavBreakpoint de        */
+/* assets/index.js: si se cambia acá, cambiarlo también allá.          */
 /* ================================================================== */
 
-/* ---------- Botones flotantes: apilados y con safe-area ---------- */
-.wa-float {
-  right: max(20px, env(safe-area-inset-right));
-  bottom: max(20px, env(safe-area-inset-bottom));
-}
-
-.scroll-to-top {
-  right: max(20px, env(safe-area-inset-right));
-  bottom: calc(max(20px, env(safe-area-inset-bottom)) + 68px);
-}
-
-@media (min-width: 1141px) {
-  .scroll-to-top {
-    right: 96px;
-    bottom: 26px;
-  }
-}
-
-/* ---------- Menú hamburguesa ---------- */
+/* ---------- Mobile menu & tablets (<= 1140px) ---------- */
 @media (max-width: 1140px) {
+  /* Header: menú hamburguesa */
   .menu-toggle {
     display: inline-flex;
   }
@@ -1454,9 +1409,21 @@ button:focus-visible,
   .nav-backdrop.show {
     opacity: 1;
   }
+
+  /* Footer: los botones flotantes quedan encima; le damos aire para que
+     no tapen el texto legal */
+  footer {
+    padding-bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+
+  /* Botones flotantes: "volver arriba" se apila sobre el de WhatsApp */
+  .scroll-to-top {
+    right: max(20px, env(safe-area-inset-right));
+    bottom: calc(max(20px, env(safe-area-inset-bottom)) + 68px);
+  }
 }
 
-/* ---------- Tablets verticales y menores ---------- */
+/* ---------- Tablets portrait (<= 1024px) ---------- */
 @media (max-width: 1024px) {
   section {
     padding: 72px 0;
@@ -1470,24 +1437,68 @@ button:focus-visible,
     margin-top: 0;
   }
 
-  .form {
-    margin-top: 0;
-  }
-
   .sec-head {
     margin-bottom: 44px;
   }
+
+  .form {
+    margin-top: 0;
+  }
 }
 
+/* ---------- Small tablets (<= 900px) ---------- */
 @media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
   .hero-art {
     width: 100%;
     max-width: 560px;
     margin-inline: auto;
   }
+
+  .svc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
 }
 
-/* ---------- Teléfonos (vertical) ---------- */
+/* ---------- Large phones (<= 760px) ---------- */
+@media (max-width: 760px) {
+  .gal-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .lightbox {
+    padding: 12px;
+  }
+
+  .lb-prev {
+    left: 8px;
+  }
+
+  .lb-next {
+    right: 8px;
+  }
+
+  .lb-caption {
+    padding: 0 56px;
+    font-size: 0.68rem;
+  }
+
+  .testi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Phones portrait (<= 700px) ---------- */
 @media (max-width: 700px) {
   .wrap {
     padding: 0 20px;
@@ -1497,12 +1508,14 @@ button:focus-visible,
     padding: 56px 0;
   }
 
-  .hero {
-    padding: 36px 0 56px;
-  }
-
+  /* Header */
   .logo img {
     height: 56px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 36px 0 56px;
   }
 
   .hero h1 {
@@ -1540,6 +1553,7 @@ button:focus-visible,
     font-size: 1.35rem;
   }
 
+  /* Section heads y servicios */
   .sec-head {
     margin-bottom: 32px;
   }
@@ -1548,14 +1562,15 @@ button:focus-visible,
     padding: 26px 22px;
   }
 
-  .ba-frame {
-    /* vertical: las fotos de obra son 3:4, así se ven enteras */
-    aspect-ratio: 3 / 4;
-  }
-
+  /* Antes / después */
   .ba-tabs {
     gap: 8px;
     margin-bottom: 20px;
+  }
+
+  .ba-frame {
+    /* vertical: las fotos de obra son 3:4, así se ven enteras */
+    aspect-ratio: 3 / 4;
   }
 
   .ba-thumbs {
@@ -1567,14 +1582,16 @@ button:focus-visible,
     height: 54px;
   }
 
-  .testi-card {
-    padding: 26px 22px;
-  }
-
+  /* Proceso y testimonios */
   .proc-item {
     padding: 24px 0;
   }
 
+  .testi-card {
+    padding: 26px 22px;
+  }
+
+  /* Contacto */
   .wa-card {
     padding: 18px 16px;
     gap: 14px;
@@ -1597,6 +1614,7 @@ button:focus-visible,
     font-size: 16px;
   }
 
+  /* Footer */
   .foot-row {
     flex-direction: column;
     align-items: flex-start;
@@ -1612,8 +1630,21 @@ button:focus-visible,
   }
 }
 
-/* ---------- Teléfonos (horizontal) ---------- */
+/* ---------- Narrow phones (<= 560px) ---------- */
+@media (max-width: 560px) {
+  .svc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proc-item {
+    grid-template-columns: 50px 1fr;
+    gap: 16px;
+  }
+}
+
+/* ---------- Phones landscape (landscape + height <= 500px) ---------- */
 @media (orientation: landscape) and (max-height: 500px) {
+  /* Header */
   .nav {
     padding-block: 6px;
   }
@@ -1622,6 +1653,15 @@ button:focus-visible,
     height: 44px;
   }
 
+  .nav-links ul a {
+    padding: 11px 2px;
+  }
+
+  .nav-links .btn {
+    margin-top: 12px;
+  }
+
+  /* Secciones y hero */
   section {
     padding: 44px 0;
   }
@@ -1638,14 +1678,7 @@ button:focus-visible,
     max-width: 420px;
   }
 
-  .nav-links ul a {
-    padding: 11px 2px;
-  }
-
-  .nav-links .btn {
-    margin-top: 12px;
-  }
-
+  /* Antes / después */
   .ba-frame {
     /* se mantiene vertical, pero el ancho lo manda el alto de pantalla
        para que el comparador entre entero sin scrollear */
@@ -1658,15 +1691,30 @@ button:focus-visible,
   }
 }
 
-/* ---------- Footer: sin franja clara sobrante abajo ---------- */
-footer {
-  padding-bottom: calc(34px + env(safe-area-inset-bottom));
-}
+/* ================================================================== */
+/* REDUCED MOTION                                                      */
+/* Para quien configuró su sistema con "reducir movimiento".           */
+/* ================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-/* En mobile los botones flotantes quedan sobre el pie: le damos aire
-   para que no tapen el texto legal */
-@media (max-width: 1140px) {
-  footer {
-    padding-bottom: calc(78px + env(safe-area-inset-bottom));
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .gal-item img {
+    transition: none;
+  }
+
+  .gal-item:hover img,
+  .gal-item:focus-visible img {
+    transform: none;
+  }
+
+  .wa-float::before {
+    animation: none;
   }
 }
